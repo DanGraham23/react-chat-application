@@ -19,8 +19,8 @@ export default function Register(){
             <h1>Welcome!</h1>
             <h2>Enter your information to register</h2>
             <form className="register-form">
-                <div className="form-input">
-                    <BsFillPersonFill/>
+                <div className="form-row">
+                    <BsFillPersonFill className="form-icon"/>
                     <input 
                     className="form-input"
                     type="text"
@@ -29,8 +29,8 @@ export default function Register(){
                     onChange={handleChange}
                     />
                 </div>
-                <div className="form-input">
-                    <BsEnvelopeFill/>
+                <div className="form-row">
+                    <BsEnvelopeFill className="form-icon"/>
                     <input 
                     className="form-input"
                     type="text"
@@ -39,8 +39,8 @@ export default function Register(){
                     onChange={handleChange}
                     />
                 </div>
-                <div className="form-input">
-                    <BsLockFill/>
+                <div className="form-row">
+                    <BsLockFill className="form-icon"/>
                     <input 
                     className="form-input"
                     type="password"
@@ -49,8 +49,8 @@ export default function Register(){
                     onChange={handleChange}
                     />
                 </div>
-                <div className="form-input">
-                    <BsLockFill/>
+                <div className="form-row">
+                    <BsLockFill className="form-icon"/>
                     <input 
                     className="form-input"
                     type="password"
@@ -59,15 +59,15 @@ export default function Register(){
                     onChange={handleChange}
                     />
                 </div>
-                <div className="form-input">
-                    <BsArrowRight/>
+                <div className="form-row">
+                    <BsArrowRight className="form-icon"/>
                     <button 
                     className="form-btn form-input"
                     type="submit"
                     placeholder="Confirm Password"
-                    ></button>
+                    >Register</button>
                 </div>
-                <span><Link to="/login">Press Here to Login Instead</Link></span>
+                <span ><Link className="form-footer" to="/login">Press Here to Login Instead</Link></span>
             </form>
         </div>
     )

@@ -5,14 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #2eb1ab;
+  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 
 h1 {
   font-size: 28px;
@@ -24,6 +23,67 @@ h2 {
   color: white
 }
 
+.App{
+  background-color: #2eb1ab;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .register-container{
   text-align: center;
+}
+
+.register-form{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 600px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-row{
+  display: flex;
+  gap: 15px;
+  width: inherit;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-input{
+  width: 60%;
+  height: 55px;
+  text-indent: 15px;
+  border-radius: 24px;
+  border: none;
+  font-size: 18px;
+  outline: none;
+}
+
+.form-icon{
+  color: #2ebdb9;
+  width: 55px;
+  height: 55px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 100%;
+}
+
+.form-btn{
+  color: #2ebdb9;
+  font-size: 20px;
+  filter: drop-shadow(5px 7px 4px #328a87);
+  text-indent: 0px;
+}
+
+.form-btn:hover{
+  background-color: #018278;
+  color: white;
+}
+
+.form-footer{
+  color: #018278;
 }
