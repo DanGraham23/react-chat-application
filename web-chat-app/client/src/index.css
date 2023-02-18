@@ -44,6 +44,19 @@ h2 {
   justify-content: center;
 }
 
+.login-container{
+  text-align: center;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 400px;
+  align-items: center;
+  justify-content: center;
+}
+
 .form-row{
   display: flex;
   gap: 15px;
@@ -65,8 +78,8 @@ h2 {
 
 .form-icon{
   color: #2ebdb9;
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   padding: 10px;
   background-color: white;
   border-radius: 100%;
