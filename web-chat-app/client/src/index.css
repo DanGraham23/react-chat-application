@@ -100,3 +100,8 @@ h2 {
 .form-footer{
   color: #018278;
 }
+
+.custom-toast{
+  height: 125px;
+  width: 275px;
+}

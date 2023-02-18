@@ -1,6 +1,8 @@
 import { BsFillPersonFill,BsLockFill,BsArrowRight } from "react-icons/bs"
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
     const [userInfo, setUserInfo] = useState({
@@ -8,12 +10,36 @@ export default function Login() {
         password: "",
     })
 
+    const toastProps = {
+        className: "custom-toast",
+        draggable: false,
+        autoClose: 7000,
+        position: toast.POSITION.BOTTOM_RIGHT,
+        theme: "colored",
+    };
+
     function handleChange(e){
         setUserInfo({...userInfo, [e.target.name]:e.target.value});
     }
 
     function handleSubmit(e){
         e.preventDefault();
+        if (validate()){
+
+        }
+    }
+
+    function validate(){
+        const {username, password} = userInfo;
+        if (username === ""){
+            toast.warning('The username field cannot be empty', toastProps);
+            return false;
+        }
+        if (password === "" ){
+            toast.warning('The password field cannot be empty', toastProps);
+            return false;
+        }
+        return true;
     }
 
     return (
@@ -50,6 +76,7 @@ export default function Login() {
                 </div>
                 <span ><Link className="form-footer" to="/register">Press Here to Register Instead</Link></span>
             </form>
+            <ToastContainer/>
         </div>
     )
 }
