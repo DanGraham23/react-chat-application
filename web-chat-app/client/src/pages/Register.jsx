@@ -10,15 +10,19 @@ export default function Register(){
         confirmPassword: "",
     })
 
-    function handleChange() {
+    function handleChange(e){
+        setUserInfo({...userInfo, [e.target.name]:e.target.value});
+    }
 
+    function handleSubmit(e){
+        e.preventDefault();
     }
 
     return (
         <div className="register-container">
             <h1>Welcome!</h1>
             <h2>Enter your information to register</h2>
-            <form className="register-form">
+            <form className="register-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                     <BsFillPersonFill className="form-icon"/>
                     <input 

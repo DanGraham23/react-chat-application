@@ -8,15 +8,19 @@ export default function Login() {
         password: "",
     })
 
-    function handleChange(){
+    function handleChange(e){
+        setUserInfo({...userInfo, [e.target.name]:e.target.value});
+    }
 
+    function handleSubmit(e){
+        e.preventDefault();
     }
 
     return (
         <div className="login-container">
             <h1>Welcome!</h1>
             <h2>Enter your information to login</h2>
-            <form className="login-form">
+            <form className="login-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                     <BsFillPersonFill className="form-icon"/>
                     <input 
