@@ -1,5 +1,6 @@
-import {BsFillPersonFill} from 'react-icons/bs';
+import {BsArrowRight, BsEnvelopeFill, BsFillPersonFill, BsLockFill} from 'react-icons/bs';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Register(){
     const [userInfo, setUserInfo] = useState({
@@ -29,7 +30,7 @@ export default function Register(){
                     />
                 </div>
                 <div className="form-input">
-                    <BsFillPersonFill/>
+                    <BsEnvelopeFill/>
                     <input 
                     className="form-input"
                     type="text"
@@ -39,7 +40,7 @@ export default function Register(){
                     />
                 </div>
                 <div className="form-input">
-                    <BsFillPersonFill/>
+                    <BsLockFill/>
                     <input 
                     className="form-input"
                     type="password"
@@ -49,7 +50,7 @@ export default function Register(){
                     />
                 </div>
                 <div className="form-input">
-                    <BsFillPersonFill/>
+                    <BsLockFill/>
                     <input 
                     className="form-input"
                     type="password"
@@ -58,6 +59,15 @@ export default function Register(){
                     onChange={handleChange}
                     />
                 </div>
+                <div className="form-input">
+                    <BsArrowRight/>
+                    <button 
+                    className="form-btn form-input"
+                    type="submit"
+                    placeholder="Confirm Password"
+                    ></button>
+                </div>
+                <span><Link to="/login">Press Here to Login Instead</Link></span>
             </form>
         </div>
     )
