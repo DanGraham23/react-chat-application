@@ -64,7 +64,6 @@ export default function Register(){
                     <button 
                     className="form-btn form-input"
                     type="submit"
-                    placeholder="Confirm Password"
                     >Register</button>
                 </div>
                 <span ><Link className="form-footer" to="/login">Press Here to Login Instead</Link></span>
