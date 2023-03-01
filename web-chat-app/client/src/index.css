@@ -105,3 +105,64 @@ h2 {
   height: 125px;
   width: 275px;
 }
+
+.logout-btn{
+  margin-left: auto;
+  width: 10%;
+  height: 80%;
+  font-size: 20px;
+  margin-right: 10px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.logout-btn:hover{
+  background-color: #2eb1ab;
+  color: white;
+}
+
+.chat-container{
+  width: 75%;
+  height: 75%;
+  background-color: rgb(255, 255, 255);
+}
+
+.chat-navbar{
+  display: flex;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  font-size: 26px;
+  border-bottom: 1px solid black;
+}
+
+.chat-header{
+  margin-left: auto;
+  
+}
+
+.chat-area{
+  width: 70%;
+  background-color: blue;
+}
+
+.chat-main{
+  width: 100%;
+  height: 90%;
+  display: flex;
+}
+
+.friends-container{
+  width: 30%;
+  background-color: red;
+  overflow: scroll;
+}
+
+.friend{
+  width: 100%;
+  height: 10%;
+  background-color: #818181;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
