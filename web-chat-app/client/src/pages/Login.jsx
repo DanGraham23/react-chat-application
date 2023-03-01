@@ -1,10 +1,14 @@
 import { BsFillPersonFill,BsLockFill,BsArrowRight } from "react-icons/bs"
-import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import { loginRoute } from "../utils/APIRoutes";
 
 export default function Login() {
+    const navigate = useNavigate();
+
     const [userInfo, setUserInfo] = useState({
         username: "",
         password: "",
@@ -18,14 +22,34 @@ export default function Login() {
         theme: "colored",
     };
 
+    useEffect( () => {
+        if (localStorage.getItem('react-chat-user') != null){
+            navigate("/");
+        }
+    }, []);
+
     function handleChange(e){
         setUserInfo({...userInfo, [e.target.name]:e.target.value});
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
         if (validate()){
-
+            const {username, password} = userInfo;
+            const {data} = await axios.post(loginRoute, {
+                username,
+                password,
+            });
+            if (data.status === false){
+                toast.warning("Username/Password invalid");
+                console.log(data.msg);
+            }
+            if (data.status === true){
+                localStorage.setItem('react-chat-user', JSON.stringify(data.user));
+                navigate("/");
+            }
+        }else{
+            console.log("Could not login user");
         }
     }
 
