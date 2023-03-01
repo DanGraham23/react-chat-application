@@ -1,10 +1,14 @@
 import {BsArrowRight, BsEnvelopeFill, BsFillPersonFill, BsLockFill} from 'react-icons/bs';
-import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {useState, useEffect} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {registerRoute} from '../utils/APIRoutes'
+import axios from 'axios';
 
 export default function Register(){
+    const navigate = useNavigate();
+
     const [userInfo, setUserInfo] = useState({
         username: "",
         email: "",
@@ -20,29 +24,50 @@ export default function Register(){
         theme: "colored",
     };
 
+    useEffect(() => {
+        if (localStorage.getItem('react-chat-user') != null){
+            navigate("/");
+        }
+    }, []);
+
     function handleChange(e){
         setUserInfo({...userInfo, [e.target.name]:e.target.value});
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
         if (validate()){
-
+            const {username, email, password} = userInfo;
+            const {data} = await axios.post(registerRoute, {
+                username,
+                email,
+                password,
+            });
+            if (data.status === false){
+                toast.warning("Username/Email are unavailable", toastProps);
+                console.log(data.msg);
+            }
+            if (data.status === true){
+                localStorage.setItem("react-chat-user", JSON.stringify(data.user));
+                navigate("/");
+            }
+        }else{
+            console.log("Failed to register account");
         }
     }
 
     function validate(){
         const {username, email, password, confirmPassword} = userInfo;
-        if (username.length < 4){
-            toast.warning('username must be atleast 4 characters', toastProps);
+        if (username.length < 3){
+            toast.warning('username must be atleast 3 characters', toastProps);
             return false;
         }
         if (email.length < 8){
             toast.warning('email must be atleast 8 characters', toastProps);
             return false;
         }
-        if (password.length < 4){
-            toast.warning('password must be atleast 4 characters', toastProps);
+        if (password.length < 8){
+            toast.warning('password must be atleast 8 characters', toastProps);
             return false;
         }
         if (password !== confirmPassword){
