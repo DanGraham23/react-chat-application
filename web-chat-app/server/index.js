@@ -10,8 +10,9 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
-// app.use("/api/auth", userRoutes);
-// app.use("/api/messages",messageRoutes);
+app.use(express.urlencoded({extended : true}));
+app.use("/api/auth", userRoutes);
+app.use("/api/messages",messageRoutes);
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
