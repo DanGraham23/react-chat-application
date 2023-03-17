@@ -1,16 +1,32 @@
 import Friends from '../components/Friends';
 import { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import { allUsersRoute } from '../utils/APIRoutes';
+import Home from '../components/Home'
+import Messages from '../components/Messages'
+
 
 export default function Chat(){ 
     const navigate = useNavigate();
     const [curUser, setCurUser] = useState({});
+    const [curChat, setCurChat] = useState(undefined);
+    const [friends, setFriends] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     async function fetchUser(){
         if (localStorage.getItem('react-chat-user') === null){
             navigate("/login");
         }else{
             setCurUser(await JSON.parse(localStorage.getItem('react-chat-user')));
+            setIsLoaded(true);
+        }
+    };
+
+    async function fetchData(){
+        if (curUser){
+            const data = await axios.get(`${allUsersRoute}/${curUser._id}`);
+            setFriends(data.data);
         }
     };
 
@@ -18,9 +34,17 @@ export default function Chat(){
         fetchUser();
     }, [curUser]);
 
+    useEffect(() => {
+        fetchData();
+    }, [curUser]);
+
     function logout(){
-        localStorage.removeItem('react-chat-user');
+        localStorage.clear();
         setCurUser({});
+    }
+
+    function handleChatChange(chat){
+        setCurChat(chat);
     }
 
     return (
@@ -31,12 +55,19 @@ export default function Chat(){
             </div>
             
             <div className='chat-main'>
-                <Friends />
-                <div className='chat-area'>
-                    This is the main chat window
-                </div>
+                <Friends
+                friends={friends}
+                changeChat={handleChatChange}/>
+                {
+                    isLoaded && curChat === undefined ? 
+                    <Home /> : 
+                    <Messages 
+                    curChat={curChat}
+                    curUser = {curUser}/>
+                    
+                }
             </div>
             
         </div>
-    )
+    );
 }
