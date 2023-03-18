@@ -10,7 +10,7 @@ export default function Friends({friends, changeChat}){
     }
 
     return (
-        <div className="friends-container">
+        <div className="friends-container scroll-style">
             {
                 friends.map((friend, index) => {
                     return (

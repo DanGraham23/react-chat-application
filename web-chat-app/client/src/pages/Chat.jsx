@@ -14,6 +14,8 @@ export default function Chat(){
     const [friends, setFriends] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
+    
+
     async function fetchUser(){
         if (localStorage.getItem('react-chat-user') === null){
             navigate("/login");

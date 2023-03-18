@@ -9,6 +9,8 @@ export default function Messages({curUser, curChat}){
     const [msgs,setMsgs] = useState([]);
     const [arrivalMsg, setArrivalMsg] = useState(null);
 
+    const scrollRef = useRef();
+
     async function fetchData(){
         if (curChat){
             const response = await axios.post(getMsgsRoute, {
@@ -44,16 +46,20 @@ export default function Messages({curUser, curChat}){
 
     }, [arrivalMsg]);
     
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({behaviour: "smooth"});
+    }, [msgs]);
+
     return (
         <div className='messages-container'>
             {
             curChat && (
             <div className='message-area'>
-            <div className='messages'>
+            <div className='messages scroll-style'>
                 {
                     msgs.map((message) => {
                         return (
-                            <div key={uuidv4()}> 
+                            <div ref={scrollRef} key={uuidv4()}> 
                                 <div className={`message ${message.fromSelf ? "sent" : "recieved"}`}>
                                     <p>{message.message}</p>
                                 </div>
