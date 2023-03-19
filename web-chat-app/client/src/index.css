@@ -210,6 +210,9 @@ h2 {
 
 .friends-container{
   width: 30%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 .friend-container{
@@ -221,6 +224,7 @@ h2 {
   justify-content: center;
   color: #1A265A;
   border-bottom: 1px solid #121a40;
+  
 }
 
 .friend-info{
