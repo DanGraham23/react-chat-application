@@ -23,7 +23,7 @@ export default function Login() {
     };
 
     useEffect( () => {
-        if (localStorage.getItem('react-chat-user') != null){
+        if (localStorage.getItem('react-chat-user')){
             navigate("/");
         }
     }, []);

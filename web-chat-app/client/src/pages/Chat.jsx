@@ -9,7 +9,7 @@ import Messages from '../components/Messages'
 
 export default function Chat(){ 
     const navigate = useNavigate();
-    const [curUser, setCurUser] = useState({});
+    const [curUser, setCurUser] = useState(undefined);
     const [curChat, setCurChat] = useState(undefined);
     const [friends, setFriends] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -17,7 +17,7 @@ export default function Chat(){
     
 
     async function fetchUser(){
-        if (localStorage.getItem('react-chat-user') === null){
+        if (!localStorage.getItem('react-chat-user')){
             navigate("/login");
         }else{
             setCurUser(await JSON.parse(localStorage.getItem('react-chat-user')));
@@ -34,7 +34,7 @@ export default function Chat(){
 
     useEffect(() => {
         fetchUser();
-    }, [curUser]);
+    }, []);
 
     useEffect(() => {
         fetchData();
@@ -42,7 +42,7 @@ export default function Chat(){
 
     function logout(){
         localStorage.clear();
-        setCurUser({});
+        navigate("/login");
     }
 
     function handleChatChange(chat){
@@ -51,10 +51,14 @@ export default function Chat(){
 
     return (
         <div className='chat-container'>
-            <div className='chat-navbar'>
-                <div className="chat-header">Hello, {curUser.username}</div>
-                <button className="logout-btn" onClick={logout}>Logout</button>
-            </div>
+            {
+                curUser && 
+                <div className='chat-navbar'>
+                    <div className="chat-header">Hello, {curUser.username}</div>
+                    <button className="logout-btn" onClick={logout}>Logout</button>
+                </div>
+            }
+            
             
             <div className='chat-main'>
                 <Friends
