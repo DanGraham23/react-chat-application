@@ -1,13 +1,14 @@
 import Friends from '../components/Friends';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { allUsersRoute } from '../utils/APIRoutes';
+import { allUsersRoute, host } from '../utils/APIRoutes';
 import Home from '../components/Home'
 import Messages from '../components/Messages'
-
+import {io} from "socket.io-client";
 
 export default function Chat(){ 
+    const socket = useRef();
     const navigate = useNavigate();
     const [curUser, setCurUser] = useState(undefined);
     const [curChat, setCurChat] = useState(undefined);
@@ -35,6 +36,13 @@ export default function Chat(){
     useEffect(() => {
         fetchUser();
     }, []);
+
+    useEffect(() => {
+        if (curUser){
+            socket.current = io(host);
+            socket.current.emit("add-user", curUser._id);
+        }
+    }, [curUser]);
 
     useEffect(() => {
         fetchData();
@@ -69,7 +77,8 @@ export default function Chat(){
                     <Home /> : 
                     <Messages 
                     curChat={curChat}
-                    curUser = {curUser}/>
+                    curUser = {curUser}
+                    socket={socket}/>
                     
                 }
             </div>

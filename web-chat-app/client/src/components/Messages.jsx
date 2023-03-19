@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 import { getMsgsRoute,sendMsgRoute } from '../utils/APIRoutes';
 import {FaPaperPlane} from 'react-icons/fa';
 
-export default function Messages({curUser, curChat}){
+export default function Messages({curUser, curChat, socket}){
     const [msg, setMsg] = useState("");
     const [msgs,setMsgs] = useState([]);
     const [arrivalMsg, setArrivalMsg] = useState(null);
@@ -33,6 +33,11 @@ export default function Messages({curUser, curChat}){
                 to: curChat._id,
                 message:msg,
             });
+            socket.current.emit("send-msg", {
+                to:curChat._id,
+                from:curChat._id,
+                message:msg,
+            });
             const messages = [...msgs];
             messages.push({fromSelf:true,message:msg});
             setMsgs(messages);
@@ -40,6 +45,15 @@ export default function Messages({curUser, curChat}){
         }
         
     }
+
+    useEffect(() => {
+        if (socket.current){
+            socket.current.on("msg-recieved", (msg) => {
+                setArrivalMsg({fromSelf:false, message:msg});
+            })
+        }
+    }, []);
+
 
     useEffect(() => {
         arrivalMsg && setMsgs((oldMsgs) => [...oldMsgs, arrivalMsg]);
