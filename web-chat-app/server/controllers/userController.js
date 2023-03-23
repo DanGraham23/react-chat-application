@@ -50,6 +50,7 @@ module.exports.getAllUsers = async (req, res, next) => {
             "username",
             "_id",
         ]);
+        users.sort((a,b) => a.username.localeCompare(b.username));
         return res.json(users);
     }catch(ex) {
         next(ex);

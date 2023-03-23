@@ -64,16 +64,6 @@ export default function Messages({curUser, curChat, socket}){
         scrollRef.current?.scrollIntoView({behaviour: "smooth"});
     }, [msgs]);
 
-    function parseDate(msg){
-        const date = {
-            year: msg.time.substring(0,4),
-            month: msg.time.substring(5,7),
-            day: msg.time.substring(8,10),
-            time: msg.time.substring(11,16),
-        };
-        return date;
-    }
-
     return (
         <div className='messages-container'>
             {
