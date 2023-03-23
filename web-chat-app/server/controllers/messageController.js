@@ -30,6 +30,7 @@ module.exports.getMessage = async (req, res, next) => {
             return {
                 fromSelf: curMsg.sender.toString() === from,
                 message: curMsg.message.text,
+                time: curMsg.createdAt,
             }
         });
         res.json(projectMessages);
