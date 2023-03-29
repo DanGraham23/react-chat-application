@@ -3,21 +3,26 @@ import axios from 'axios';
 import {v4 as uuidv4} from 'uuid';
 import { getMsgsRoute,sendMsgRoute } from '../utils/APIRoutes';
 import {FaPaperPlane} from 'react-icons/fa';
+import { useNavigate } from 'react-router';
 
 export default function Messages({curUser, curChat, socket}){
     const [msg, setMsg] = useState("");
     const [msgs,setMsgs] = useState([]);
     const [arrivalMsg, setArrivalMsg] = useState(null);
-
+    const navigate = useNavigate();
     const scrollRef = useRef();
 
     async function fetchData(){
         if (curChat){
-            const response = await axios.post(getMsgsRoute, {
+            const res = await axios.post(getMsgsRoute, {
                 from: curUser._id,
                 to: curChat._id,
-            });
-            setMsgs(response.data);
+            }, { withCredentials: true });
+            if (res.data.status === false){
+                localStorage.clear();
+                navigate('/login');
+            }
+            setMsgs(res.data);
         }
     }
 
@@ -28,11 +33,17 @@ export default function Messages({curUser, curChat, socket}){
     async function handleSend(e){
         e.preventDefault();
         if (msg.length > 0){
-            await axios.post(sendMsgRoute, {
+            const res = await axios.post(sendMsgRoute, {
                 from: curUser._id,
                 to: curChat._id,
                 message:msg,
+            },{
+                withCredentials:true,
             });
+            if (res.data.status === false){
+                localStorage.clear();
+                navigate('/login');
+            }
             socket.current.emit("send-msg", {
                 to:curChat._id,
                 from:curChat._id,
