@@ -41,13 +41,15 @@ export default function Login() {
             const {data} = await axios.post(loginRoute, {
                 username,
                 password,
-            });
+            },{
+                withCredentials: true,
+              });
             if (data.status === false){
                 toast.warning("Username/Password invalid");
                 console.log(data.msg);
             }
             if (data.status === true){
-                localStorage.setItem('react-chat-user', JSON.stringify(data.user));
+                localStorage.setItem('react-chat-user', JSON.stringify({username:data.username,_id:data._id}));
                 navigate("/");
             }
         }else{

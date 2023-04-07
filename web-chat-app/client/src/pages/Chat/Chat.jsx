@@ -29,8 +29,15 @@ export default function Chat(){
 
     async function fetchData(){
         if (curUser){
-            const data = await axios.get(`${allUsersRoute}/${curUser._id}`);
-            setFriends(data.data);
+           
+            const res = await axios.get(`${allUsersRoute}/${curUser._id}`, {
+                withCredentials:true,
+            });
+            if (res.data.status === false){
+                localStorage.clear();
+                navigate('/login');
+            }
+            setFriends(res.data);
         }
     };
 

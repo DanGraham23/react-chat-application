@@ -45,7 +45,16 @@ module.exports.login = async (req, res, next) => {
         if (!isValidPassword){
             return res.json({msg:"Invalid username/password", status:false});
         }
+        const id = user._id;
+        const token = jwt.sign({username:user.username, _id:user._id}, process.env.JWT_KEY, {
+            expiresIn:300,
+            
+        });
+        res.cookie("token", token, {
+            httpOnly:true,
+        });
         delete user.password;
+<<<<<<< HEAD
         const id = user._id;
         const token = jwt.sign({user}, process.env.TOKEN_KEY, {
             expiresIn: 30000,
@@ -55,6 +64,9 @@ module.exports.login = async (req, res, next) => {
             httpOnly: true,
         });
         return res.json({status:true, user});
+=======
+        return res.json({status:true, username:user.username,_id:user._id});
+>>>>>>> 7d066d3bf578fdb5506c2db33df82bab29f16d34
     }catch(ex) {
         next(ex);
     }

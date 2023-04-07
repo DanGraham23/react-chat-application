@@ -43,7 +43,10 @@ export default function Register(){
                 username,
                 email,
                 password,
-            });
+            },{
+                //AxiosRequestConfig parameter
+                withCredentials: true //correct
+              });
             if (data.status === false){
                 toast.warning("Username/Email are unavailable", toastProps);
                 console.log(data.msg);

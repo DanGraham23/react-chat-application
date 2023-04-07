@@ -4,10 +4,10 @@
 
 ### Features:
 - Users can login/register with bcrypt for password hashing
+- JWTs are stored in users' cookies to handle authorization of sensitive back-end endpoints
 - Friends list can be used to navigate between different chats
 - Instant messaging provided by sockets
-- Ability to logout from the chat application
-
+- Ability to logout
 
 ### To use:
 - Install MongoDB community edition
@@ -16,3 +16,7 @@
 - Frontend runs on *localhost:3000*, backend on *localhost:3001*
 - Register users to see them appear in friends list, then start messaging!
 
+
+![register-form](https://user-images.githubusercontent.com/59900510/230652047-9d88b56f-4cc2-4a2d-83ce-c0a3157dea00.JPG)
+![login-form](https://user-images.githubusercontent.com/59900510/230652058-ac6b61f1-5574-4448-abfa-337fe2a78756.JPG)
+![main-chat](https://user-images.githubusercontent.com/59900510/230652063-dc0c2a5d-4b58-4248-af82-1873c6335440.JPG)
