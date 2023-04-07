@@ -8,6 +8,7 @@
 - Friends list can be used to navigate between different chats
 - Instant messaging provided by sockets
 - Ability to logout
+- Form validation with toast popups for invalid form input
 
 ### To use:
 - Install MongoDB community edition
