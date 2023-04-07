@@ -19,16 +19,18 @@ module.exports.register = async (req, res, next) => {
             username,
             password: hashedPassword,
         });
-        const id = user._id;
-        const token = jwt.sign({id}, process.env.TOKEN_KEY, {
-            expiresIn: 300,
-            
+        const token = jwt.sign({username:user.username, _id:user._id}, process.env.TOKEN_KEY, {
+            expiresIn:300,
         });
         res.cookie("token", token, {
             httpOnly: true,
         });
         delete user.password;
-        return res.json({status: true, user});
+        const returnedUser = {
+            username:user.username,
+            _id:user._id
+        };
+        return res.json({status:true, returnedUser});
     }catch(ex){
         next(ex);
     }
@@ -45,8 +47,7 @@ module.exports.login = async (req, res, next) => {
         if (!isValidPassword){
             return res.json({msg:"Invalid username/password", status:false});
         }
-        const id = user._id;
-        const token = jwt.sign({username:user.username, _id:user._id}, process.env.JWT_KEY, {
+        const token = jwt.sign({username:user.username, _id:user._id}, process.env.TOKEN_KEY, {
             expiresIn:300,
             
         });
@@ -54,19 +55,11 @@ module.exports.login = async (req, res, next) => {
             httpOnly:true,
         });
         delete user.password;
-<<<<<<< HEAD
-        const id = user._id;
-        const token = jwt.sign({user}, process.env.TOKEN_KEY, {
-            expiresIn: 30000,
-            
-        });
-        res.cookie("token", token, {
-            httpOnly: true,
-        });
-        return res.json({status:true, user});
-=======
-        return res.json({status:true, username:user.username,_id:user._id});
->>>>>>> 7d066d3bf578fdb5506c2db33df82bab29f16d34
+        const returnedUser = {
+            username:user.username,
+            _id:user._id
+        };
+        return res.json({status:true, returnedUser});
     }catch(ex) {
         next(ex);
     }
