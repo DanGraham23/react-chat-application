@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {BsFillPersonFill} from 'react-icons/bs';
+import './style.css';
 
 export default function Friends({friends, changeChat}){
     const [curFriendSelected, setCurFriendSelected] = useState(undefined);

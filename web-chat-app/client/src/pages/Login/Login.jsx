@@ -4,7 +4,8 @@ import {Link, useNavigate} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { loginRoute } from "../utils/APIRoutes";
+import { loginRoute } from "../../utils/APIRoutes";
+import './style.css';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function Login() {
         e.preventDefault();
         if (validate()){
             const {username, password} = userInfo;
+            axios.defaults.withCredentials = true;
             const {data} = await axios.post(loginRoute, {
                 username,
                 password,

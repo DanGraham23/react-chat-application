@@ -3,8 +3,9 @@ import {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {registerRoute} from '../utils/APIRoutes'
+import {registerRoute} from '../../utils/APIRoutes'
 import axios from 'axios';
+import './style.css';
 
 export default function Register(){
     const navigate = useNavigate();

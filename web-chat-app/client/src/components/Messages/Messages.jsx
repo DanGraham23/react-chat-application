@@ -1,8 +1,9 @@
 import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import {v4 as uuidv4} from 'uuid';
-import { getMsgsRoute,sendMsgRoute } from '../utils/APIRoutes';
+import { getMsgsRoute,sendMsgRoute } from '../../utils/APIRoutes';
 import {FaPaperPlane} from 'react-icons/fa';
+import './style.css';
 
 export default function Messages({curUser, curChat, socket}){
     const [msg, setMsg] = useState("");
@@ -75,7 +76,7 @@ export default function Messages({curUser, curChat, socket}){
                         return (
                             <div ref={scrollRef} key={uuidv4()}> 
                                 <div className={`message ${message.fromSelf ? "sent" : "recieved"}`}>
-                                    <p>{message.message}</p>
+                                    <p className='message-text'>{message.message}</p>
                                     {
                                         message.time &&
                                         <div className='message-date'> 

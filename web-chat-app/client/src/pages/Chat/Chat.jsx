@@ -1,11 +1,12 @@
-import Friends from '../components/Friends';
+import Friends from '../../components/Friends/Friends';
 import { useState, useEffect, useRef } from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { allUsersRoute, host } from '../utils/APIRoutes';
-import Home from '../components/Home'
-import Messages from '../components/Messages'
+import { allUsersRoute, host } from '../../utils/APIRoutes';
+import Home from '../../components/Home/Home'
+import Messages from '../../components/Messages/Messages'
 import {io} from "socket.io-client";
+import './style.css';
 
 export default function Chat(){ 
     const socket = useRef();
