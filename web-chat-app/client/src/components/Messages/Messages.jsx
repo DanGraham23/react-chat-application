@@ -4,6 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 import { getMsgsRoute,sendMsgRoute } from '../../utils/APIRoutes';
 import {FaPaperPlane} from 'react-icons/fa';
 import './style.css';
+import {useNavigate} from 'react-router-dom';
 
 export default function Messages({curUser, curChat, socket}){
     const [msg, setMsg] = useState("");
