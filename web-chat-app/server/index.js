@@ -4,13 +4,17 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const socket = require("socket.io");
+const cookieParse = require('cookie-parser');
+
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors({ origin:'http://localhost:3000', credentials:true }));
 app.use(express.json());
+app.use(cookieParse());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages",messageRoutes);
 
